@@ -2,15 +2,13 @@
 # vi: set ft=ruby :
 
 $ansibleInstall = <<SCRIPT
-yum install wget -y
-mkdir ~/ansibleInstall
-wget -o ~/ansibleInstall/ansible-tower-setup-latest.tar.gz \
-  https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
-tar xzvf ~/ansibleInstall/ansible-tower-setup-latest.tar.gz
+wget https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
+tar zxvf ./ansible-tower-setup-latest.tar.gz
 SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/rhel8"
+  config.vm.box_check_update = false
   config.vm.hostname = "ansible.mymachine.local"
   config.vm.network "private_network", ip: "192.168.90.10"
   config.vm.provision "shell", inline: $ansibleInstall
