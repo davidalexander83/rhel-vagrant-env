@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Creates an Ansible Tower local demo environment
+
 $ansibleInstall = <<SCRIPT
 wget https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
 tar zxvf ./ansible-tower-setup-latest.tar.gz
