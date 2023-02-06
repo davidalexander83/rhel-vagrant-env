@@ -12,7 +12,8 @@ SCRIPT
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/rhel8"
   config.vm.hostname = "ansible.mymachine.local"
-  config.vm.network "private_network", ip: "192.168.90.1"
+  config.vm.network "private_network", ip: "192.168.90.10"
+  config.vm.provision "shell", inline: $ansibleInstall
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "4096"
     vb.cpus = "2"
