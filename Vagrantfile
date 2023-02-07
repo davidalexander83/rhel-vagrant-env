@@ -4,15 +4,16 @@
 # Creates an Ansible Tower local demo environment
 
 $ansibleInstall = <<SCRIPT
-wget https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-latest.tar.gz
-tar zxvf ./ansible-tower-setup-latest.tar.gz
+cp /home/vagrant/data_files/ansible-tower-setup-latest.tar.gz /home/vagrant/ansible.tar.gz
+tar zxvf ansible.tar.gz
 SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/rhel8"
   config.vm.box_check_update = false
   config.vm.hostname = "ansible.mymachine.local"
-  config.vm.network "public_network"
+  config.vm.network "private_network", ip: "192.168.90.10"
+  config.vm.synced_folder "./data_files", "/home/vagrant/data_files"
   config.vm.provision "shell", inline: $ansibleInstall
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "4096"
